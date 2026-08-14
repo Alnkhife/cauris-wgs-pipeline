@@ -1,0 +1,8 @@
+data/
+analysis/
+logs/
+working/
+output/
+__pycache__/
+*.pyc
+.DS_Store
