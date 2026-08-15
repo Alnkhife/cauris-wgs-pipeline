@@ -2,7 +2,7 @@
 """Build a SNP-only multi-FASTA alignment from a multi-sample VCF (haploid).
 Usage: wp5_build_aln.py <in.vcf> <ref.fasta> <out.fasta>
 """
-
+import os
 import sys
 
 vcf, ref, out = sys.argv[1], sys.argv[2], sys.argv[3]

@@ -5,11 +5,11 @@ WP2 stage A: locus table for resistance genes on B8441 (GCF_002759435.1).
 For each gene: merge CDS exons, translate, and map key codon positions back to
 genomic coordinates (exon-aware). Output: analysis/02_variant_confirm/locus_coordinates.tsv
 """
+import os
 
-
-REF = '$HOME/Projects/cauris-wgs-analysis/data/raw/reference/B8441_refseq.fna'
-GFF = '$HOME/Projects/cauris-wgs-analysis/data/raw/reference/B8441_refseq.gff'
-OUT = '$HOME/Projects/cauris-wgs-analysis/analysis/02_variant_confirm'
+REF = os.path.expanduser('~/Projects/cauris-wgs-analysis/data/raw/reference/B8441_refseq.fna')
+GFF = os.path.expanduser('~/Projects/cauris-wgs-analysis/data/raw/reference/B8441_refseq.gff')
+OUT = os.path.expanduser('~/Projects/cauris-wgs-analysis/analysis/02_variant_confirm')
 
 LOCI = {
     'ERG11': ('NC_140807.1', '-', 'lanosterol 14-alpha-demethylase', [('K143', 143), ('Y132', 132)]),

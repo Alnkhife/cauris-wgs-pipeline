@@ -3,12 +3,11 @@
 snp-dists + IQ-TREE2, and report where the 19 study isolates fall relative
 to the Saudi context isolates."""
 import os
-
 import subprocess
 import sys
 
 ROOT = os.path.expanduser('~/Projects/cauris-wgs-analysis')
-ENV = os.path.join(os.environ['CONDA_PREFIX'], 'bin')
+ENV = os.environ.get('CONDA_PREFIX', '') + '/bin'
 OUT = os.path.join(ROOT, 'analysis/07_context')
 GENO = os.path.join(OUT, 'genotypes')
 SITES = os.path.join(OUT, 'sites.tsv')

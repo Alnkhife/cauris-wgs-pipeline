@@ -4,11 +4,11 @@ WP4 stage B: compare freebayes SNP-distance matrix vs MycoSNP matrix.
 Produces scatter plot, Bland-Altman-style agreement, and discordant-pair table.
 
 Inputs:
-  analysis/05_phylogeny/freebayes_snpdists.tsv     (independent caller)
+  analysis/05_phylogeny/freebayes_snpdists.tsv     (my independent caller)
   analysis/06_mycosnp/snpdists/combined.tsv        (official MycoSNP run, if available)
-  previously reported values are embedded for reference when reference outputs are absent.
+  thesis-reported values are embedded for reference when the Drive MycoSNP outputs are absent.
 """
-
+import os
 
 import matplotlib
 matplotlib.use('Agg')
@@ -33,8 +33,8 @@ def read_matrix(path):
 def main():
     fb = read_matrix(FB)
     print('freebayes matrix:', fb.shape)
-    # key comparisons (previously reported numbers)
-    reported = {
+    # key comparisons (thesis-reported MycoSNP numbers)
+    thesis = {
         'within K143R cluster': (4, 27, 12),
         'within Y132F cluster': (6, 19, 11),
         'between clusters': (38, 67, 49),
@@ -55,14 +55,14 @@ def main():
         sub = fb.loc[k143, k143].values.astype(float)
         trik = np.triu(~np.isnan(sub), 1)
         print(f'within K143R cluster: {sub[trik].min():.0f}-{sub[trik].max():.0f} '
-              f'(median {np.median(sub[trik]):.0f}); reported: 4-27 (median 12)')
+              f'(median {np.median(sub[trik]):.0f}); thesis: 4-27 (median 12)')
         sub2 = fb.loc[y132, y132].values.astype(float)
         triy = np.triu(~np.isnan(sub2), 1)
         print(f'within Y132F cluster: {sub2[triy].min():.0f}-{sub2[triy].max():.0f} '
-              f'(median {np.median(sub2[triy]):.0f}); reported: 6-19 (median 11)')
+              f'(median {np.median(sub2[triy]):.0f}); thesis: 6-19 (median 11)')
         cross = fb.loc[k143, y132].values.astype(float)
         print(f'between clusters: {cross.min():.0f}-{cross.max():.0f} '
-              f'(median {np.median(cross):.0f}); reported: 38-67 (median 49)')
+              f'(median {np.median(cross):.0f}); thesis: 38-67 (median 49)')
 
     # if the official MycoSNP matrix exists, do the caller-vs-caller comparison
     if os.path.exists(MS):

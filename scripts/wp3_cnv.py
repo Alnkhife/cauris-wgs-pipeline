@@ -13,7 +13,7 @@ Output: analysis/03_virulence_cnv/cnv_table.tsv
         analysis/03_virulence_cnv/cnv_heatmap.pdf
 """
 import gzip
-
+import os
 import statistics
 
 import matplotlib

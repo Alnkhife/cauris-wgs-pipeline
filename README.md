@@ -22,9 +22,11 @@ WP3  CNV / virulence screen  per-gene mean coverage (samtools bedcov) across
 WP4  Orthogonal SNP calling  freebayes (haploid) on ~80x downsampled BAMs;
                           1,301 biallelic SNPs after filtering
 WP5  Phylogeny           SNP-only alignment -> snp-dists -> IQ-TREE2 (MFP,
-                          1000 UFBoot) -> annotated tree figure
-WP6  Regional context    align public Saudi C. auris genomes, genotype them at
-                          the study SNP sites, combined 46-isolate phylogeny
+                           1000 UFBoot) -> annotated tree figure (FigTree,
+                           iTOL circular/unrooted renderings)
+WP6  Regional context    align public Saudi C. auris genomes (wp6_download),
+                           genotype them at the study SNP sites, combined
+                           46-isolate phylogeny
 ```
 
 ## Tools and versions
@@ -74,6 +76,8 @@ bash scripts/wp5_tree.sh           # distances + IQ-TREE2
 bash scripts/wp6_align.sh          # context-genome alignment
 bash scripts/wp6_genotype.sh       # site genotyping of context genomes
 python scripts/wp6_build_combined.py  # combined alignment + tree
+bash scripts/wp6_mycosnp_run.sh    # MycoSNP-NF context-genome run (optional)
+bash scripts/itol_generate.sh      # iTOL upload + annotation + export (needs iTOL account API key)
 ```
 
 ## Outputs
@@ -91,8 +95,9 @@ python scripts/wp6_build_combined.py  # combined alignment + tree
 - All 19 isolates: Clade I; ERG11 K143R (13/19), ERG11 Y132F (6/19),
   CDR1 V704L (13/19), FCY1 S70R (19/19); no FKS1 hot-spot mutations.
 - 1,301 high-quality biallelic SNPs; three internally clonal lineages
-  (within-lineage pairwise distances < 80 SNPs).
-- Study isolates 0-1 SNPs from published Saudi outbreak isolates
+  (within-lineage pairwise distances < 80 SNPs); between-lineage 159-233 SNPs.
+- Of 27 publicly available Saudi context genomes, 21 were identical (0 SNPs)
+  to at least one study isolate and a further five differed by a single SNP
   (Guan et al., 2025, *Microbiology Spectrum*).
 
 ## Notes

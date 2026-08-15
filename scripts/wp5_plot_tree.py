@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Render the IQ-TREE consensus tree as a publication-quality annotated vector figure.
 Tips coloured by resistance genotype; three lineages labelled.
@@ -10,9 +11,9 @@ from io import StringIO
 
 import scipy.cluster.hierarchy as sch
 
-TREE = '$HOME/Projects/cauris-wgs-analysis/analysis/05_phylogeny/tree_freebayes.contree'
-OUT_PDF = '$HOME/Projects/cauris-wgs-analysis/output/Figure_4_phylogeny_freebayes.pdf'
-OUT_PNG = '$HOME/Projects/cauris-wgs-analysis/output/Figure_4_phylogeny_freebayes.png'
+TREE = os.path.expanduser('~/Projects/cauris-wgs-analysis/analysis/05_phylogeny/tree_freebayes.contree')
+OUT_PDF = os.path.expanduser('~/Projects/cauris-wgs-analysis/output/Figure_4_phylogeny_freebayes.pdf')
+OUT_PNG = os.path.expanduser('~/Projects/cauris-wgs-analysis/output/Figure_4_phylogeny_freebayes.png')
 
 K143R = {'Sample01','Sample04','Sample05','Sample06','Sample07','Sample09','Sample10',
          'Sample13','Sample14','Sample15','Sample16','Sample19','Sample20'}
@@ -88,11 +89,11 @@ for i, (name, d) in enumerate(tips):
     y[name] = len(tips) - 1 - i
 
 fig, ax = plt.subplots(figsize=(7, 8))
-colors = {'Sample01': '#1f77b4', 'Sample04': '#1f77b4', 'Sample05': '#1f77b4',
-          'Sample14': '#1f77b4', 'Sample15': '#1f77b4', 'Sample16': '#1f77b4',
-          'Sample19': '#1f77b4', 'Sample20': '#1f77b4',
-          'Sample06': '#5a8fbf', 'Sample07': '#5a8fbf', 'Sample09': '#5a8fbf',
-          'Sample10': '#5a8fbf', 'Sample13': '#5a8fbf',
+colors = {'Sample01': '#1a237e', 'Sample04': '#1a237e', 'Sample05': '#1a237e',
+          'Sample14': '#1a237e', 'Sample15': '#1a237e', 'Sample16': '#1a237e',
+          'Sample19': '#1a237e', 'Sample20': '#1a237e',
+          'Sample06': '#00897b', 'Sample07': '#00897b', 'Sample09': '#00897b',
+          'Sample10': '#00897b', 'Sample13': '#00897b',
           'Sample03': '#d62728', 'Sample08': '#d62728', 'Sample11': '#d62728',
           'Sample12': '#d62728', 'Sample17': '#d62728', 'Sample18': '#d62728'}
 
@@ -145,8 +146,8 @@ for c in children:
     draw(c, 0, y[c[0]] if c[1] is None else None)
 
 from matplotlib.lines import Line2D
-legend = [Line2D([0], [0], marker='s', color='w', markerfacecolor='#1f77b4', markersize=10, label='K143R/CDR1_V704L (clade B)'),
-          Line2D([0], [0], marker='s', color='w', markerfacecolor='#5a8fbf', markersize=10, label='K143R/CDR1_V704L (clade A)'),
+legend = [Line2D([0], [0], marker='s', color='w', markerfacecolor='#1a237e', markersize=10, label='K143R/CDR1_V704L (clade B - navy)'),
+          Line2D([0], [0], marker='s', color='w', markerfacecolor='#00897b', markersize=10, label='K143R/CDR1_V704L (clade A - teal)'),
           Line2D([0], [0], marker='s', color='w', markerfacecolor='#d62728', markersize=10, label='Y132F')]
 ax.legend(handles=legend, loc='upper left', fontsize=8, frameon=False)
 ax.set_title('Maximum-likelihood phylogeny of 19 C. auris isolates (IQ-TREE2, freebayes SNP set)', fontsize=9)

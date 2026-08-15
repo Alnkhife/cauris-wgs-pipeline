@@ -8,7 +8,7 @@ Output: analysis/02_variant_confirm/variant_table.tsv
         analysis/02_variant_confirm/concordance_table.tsv
 """
 import csv
-
+import os
 import re
 
 ROOT = os.path.expanduser('~/Projects/cauris-wgs-analysis')
